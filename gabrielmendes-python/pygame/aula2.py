@@ -41,13 +41,19 @@ dark_green = (0, 100, 0)
 dark_blue = (0, 0, 100)
 relogio = pygame.time.Clock()
 
-
 tela = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption("Desenhando um Círculo")
 
+fonte = pygame.font.SysFont('times new roman', 28, True)
+score = 0
+
+# Carregar e tocar a música
+pygame.mixer.music.load('pygame/sons/bossa_nova.mp3')
+pygame.mixer.music.play(-1)  # -1 para tocar em loop
+
 running = True
 while running:
-    relogio.tick(60)  # 60 FPS
+    relogio.tick(3000)  # 60 FPS
     tela.fill(dark_blue)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -63,16 +69,25 @@ while running:
             centro_y = centro_y + 10 # Move o círculo para baixo
 
         
-    player = pygame.draw.circle(tela, vermelho, (centro_x, centro_y), raio) # desenha o círculo
-    enemy = pygame.draw.rect(tela, branco, (x_enemy, y_enemy, base_ret, altura_ret)) # desenha o retângulo
+    enemy = pygame.draw.circle(tela, vermelho, (centro_x, centro_y), raio) # desenha o círculo
+    player = pygame.draw.rect(tela, branco, (x_enemy, y_enemy, base_ret, altura_ret)) # desenha o retângulo
     #auxiliar = pygame.draw.polygon(tela, dark_blue, vertices_triangulo) # desenha o triângulo
 
     # colisão do enemy e do player
     if player.colliderect(enemy):
         x_enemy = randint(40, 600)
         y_enemy = randint(40, 500)
-        print("Colidiu!")
+        score += 1
+        som_colisao = pygame.mixer.Sound('pygame/sons/laser1.wav')
+        som_colisao.play()
+
+    # renderização do texto
+    texto_score = fonte.render(f"Pontuação: {score}", True, branco)
+    tela.blit(texto_score,(300, 20))
     pygame.display.flip()  # Atualiza a tela
+
+
+pygame.quit()
 '''
     # colisão do auxiliar e do player
     if player.colliderect(auxiliar):
@@ -86,4 +101,3 @@ while running:
         print("Colidiu!")
     pygame.display.flip()  # Atualiza a tela
 '''
-pygame.quit()

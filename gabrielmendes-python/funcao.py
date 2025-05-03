@@ -26,6 +26,7 @@ def operacoes_basicas(a, b):
     return soma, subtracao, multiplicacao, divisao
 
 resultados = operacoes_basicas(10, 2)
+print(resultados) # resultado é uma tupla
 print("Resultados das operações básicas:\n"
     f"A Soma é: {resultados[0]}",
     f"\nA Subtração é: {resultados[1]}",
