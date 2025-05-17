@@ -3,7 +3,6 @@ from pygame.locals import*
 from random import randint
 
 pygame.init()
-
 # medidas da tela 
 largura = 800
 altura = 600
@@ -20,8 +19,8 @@ x_controle = vel
 y_controle = 0
 
 # Coordenadas do objeto retângulo
-base_ret = 30
-altura_ret = 50
+base_ret = 50
+altura_ret = 30
 
 x_enemy = randint(40, 600) # Posição aleatória do retângulo no eixo x
 y_enemy = randint(40, 500) # Posição aleatória do retângulo no eixo y
